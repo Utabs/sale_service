@@ -37,11 +37,18 @@ public class JwtRequestFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
             throws ServletException, IOException {
+        Enumeration<String> headerNames = request.getHeaderNames();
+
+        if (headerNames != null) {
+            while (headerNames.hasMoreElements()) {
+                System.out.println(headerNames+": " + request.getHeader(headerNames.nextElement()));
+            }
+        }
+
 
         final String requestTokenHeader = request.getHeader("Authorization");
 
-        Enumeration<String> headerNames = request.getHeaderNames();
-        HashMap<String, String> headers = new HashMap<>();
+         HashMap<String, String> headers = new HashMap<>();
         for (Enumeration<String> names = request.getHeaderNames(); names.hasMoreElements(); ) {
             String name = names.nextElement();
             for (Enumeration<String> values = request.getHeaders(name); values.hasMoreElements(); ) {

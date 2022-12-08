@@ -1,9 +1,8 @@
 package co.shop.model.entity.user;
 
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -13,11 +12,12 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "User",uniqueConstraints = {@UniqueConstraint(name = "UC_UNAME",columnNames = {"USER_NAME"})})
-@Data
+@Table(name = "Users",uniqueConstraints = {@UniqueConstraint(name = "UC_UNAME",columnNames = {"USER_NAME"})})
 @AllArgsConstructor
 @NoArgsConstructor
-public class User implements Serializable {
+@Setter
+@Getter
+public class Users implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,7 +25,7 @@ public class User implements Serializable {
     private Long id;
 
     @Column(name = "CREATE_DATE")
-    private Timestamp createDate;
+    private Instant createDate;
 
     @Column(name = "ENABLED")
     private Boolean enabled;
@@ -54,9 +54,11 @@ public class User implements Serializable {
     @Column(name = "USER_NAME", length = 20)
     private String userName;
 
-    @OneToMany(mappedBy = "user")
+    @JsonIgnore
+    @OneToMany(mappedBy = "users")
     private Set<UserBranch> userBranches = new LinkedHashSet<>();
 
+    @JsonIgnore
     @ManyToMany
     @JoinTable(name = "UserRole",
             joinColumns = @JoinColumn(name = "USER_ID"),

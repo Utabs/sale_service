@@ -1,30 +1,32 @@
 package co.shop.controller;
 
-import co.shop.model.entity.product.Product;
-import co.shop.model.entity.shop.Order;
-import co.shop.service.ProductService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import co.shop.model.dto.ProductDTO;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 
-@RestController
-@CrossOrigin(origins = "http://192.168.1.3:4200", maxAge = 3600)
-@RequestMapping("/api/product")
-public class ProductController {
+@Api(tags = "Product API")
+public interface ProductController {
+    @ApiOperation("Add new data")
+    ProductDTO save(@RequestBody ProductDTO product);
 
-    @Autowired
-    private ProductService productService;
+    @ApiOperation("Find by Id")
+    ProductDTO findById(@PathVariable("id") Long id);
 
-    @GetMapping
-    ResponseEntity<List<Product>> getProducts() {
-        return new ResponseEntity<>(productService.getProducts(),HttpStatus.OK);
-    }
+    @ApiOperation("Delete based on primary key")
+    void delete(@PathVariable("id") Long id);
 
+    @ApiOperation("Find all data")
+    List<ProductDTO> list();
 
+    @ApiOperation("Pagination request")
+    Page<ProductDTO> pageQuery(Pageable pageable);
+
+    @ApiOperation("Update one data")
+    ProductDTO update(@RequestBody ProductDTO dto, @PathVariable("id") Long id);
 }

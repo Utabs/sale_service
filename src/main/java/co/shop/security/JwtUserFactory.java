@@ -2,7 +2,7 @@ package co.shop.security;
 
 import co.shop.model.entity.user.JwtUser;
 import co.shop.model.entity.user.Role;
-import co.shop.model.entity.user.User;
+import co.shop.model.entity.user.Users;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
@@ -17,15 +17,15 @@ public final class JwtUserFactory {
     private JwtUserFactory() {
     }
 
-    public static JwtUser create(User user) {
+    public static JwtUser create(Users users) {
         return new JwtUser(
-                user.getId(),
-                user.getUserName(),
-                user.getName(),
-                user.getFamily(),
-                user.getNationalCode(),
-                user.getPassword(),
-                mapToGrantedAuthorities(user.getRoles()),true,new Date() );
+                users.getId(),
+                users.getUserName(),
+                users.getName(),
+                users.getFamily(),
+                users.getNationalCode(),
+                users.getPassword(),
+                mapToGrantedAuthorities(users.getRoles()),true,new Date() );
     }
 
     private static List<GrantedAuthority> mapToGrantedAuthorities(Collection<Role> authorities) {

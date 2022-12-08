@@ -1,8 +1,10 @@
 package co.shop.model.dto;
 
-import lombok.Data;
+import lombok.*;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class UserDto {
     private String name;
     private String family;
@@ -11,4 +13,5 @@ public class UserDto {
     private String password;
     private String phoneNumber;
     private Boolean active;
+
 }

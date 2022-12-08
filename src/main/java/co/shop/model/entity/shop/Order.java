@@ -9,12 +9,10 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @Entity
-@Table(name = "Order")
-@Data
+@Table(name = "Orders")
 @AllArgsConstructor
 @NoArgsConstructor
 public class Order implements Serializable {
@@ -24,17 +22,28 @@ public class Order implements Serializable {
     @Column(name = "ID")
     private Long id;
 
-    @Column(name = "CODE_NUM", columnDefinition = "nvarchar(20)")
+    @Column(name = "CODE_NUM")//, columnDefinition = "nvarchar(20)")
     private String codeNum;
 
-    @Column(name = "REG_DATE")
-    private Integer regDate;
+    @Column(name = "ORDER_DATE")
+    private Integer orderDate;
 
+    @Column(name = "REQUIRE_DATE")
+    private Integer requireDate;
 
-    @OneToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name = "OrderItem_ID", updatable = false, insertable = false)
-    private List<OrderItem> orderItems;
+    @Column(name = "STATUS")
+    private Integer orderStatus;
 
+    @Column(name = "COMMENT")//, columnDefinition = "nvarchar(1000)")
+    private String orderComment;
+
+    @OneToMany(mappedBy = "order")
+    private List<OrderItem> orderItems = new ArrayList<>();
+
+    @OneToMany(mappedBy = "order")
+    private List<Payment> payments = new ArrayList<>();
+
+//    // toDo: ManytoOne
     @OneToOne(orphanRemoval = true)
     @JoinColumn(name = "UserBranch_ID")
     private UserBranch userBranch;
@@ -43,15 +52,15 @@ public class Order implements Serializable {
     @JoinColumn(name = "Customer_ID")
     private Customer customer;
 
-    public void addDetail(OrderItem orderItem) {
-        orderItems.add(orderItem);
-        orderItem.setOrder(this);
-    }
-
-    public void removeDetail(OrderItem orderItem) {
-        orderItems.remove(orderItem);
-        orderItem.setOrder(null);
-    }
+//    public void addDetail(OrderItem orderItem) {
+//        orderItems.add(orderItem);
+//        orderItem.setOrder(this);
+//    }
+//
+//    public void removeDetail(OrderItem orderItem) {
+//        orderItems.remove(orderItem);
+//        orderItem.setOrder(null);
+//    }
 
 
 }

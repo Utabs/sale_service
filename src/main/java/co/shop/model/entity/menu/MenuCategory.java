@@ -5,12 +5,11 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
+import java.time.Instant;
 import java.util.List;
 
 @Entity
 @Table(name = "MenuCategory")
-@Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class MenuCategory {
@@ -20,14 +19,14 @@ public class MenuCategory {
     @Column(name = "ID", nullable = false)
     private Integer id;
 
-    @Column(name = "Title",columnDefinition = "NVARCHAR(20)")
+    @Column(name = "Title")//,columnDefinition = "NVARCHAR(20)")
     private String title;
 
     @Column(name = "Enabled" )
     private boolean enabled;
 
     @Column(name = "CreateDate")
-    private Timestamp createDate;
+    private Instant createDate;
 
     @OneToMany(mappedBy = "menuCategory")
     private List<Menu> menus;

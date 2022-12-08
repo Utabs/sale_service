@@ -1,12 +1,14 @@
 package co.shop.controller;
 
-import co.shop.model.dto.JwtRequest;
-import co.shop.model.dto.JwtResponse;
-import co.shop.model.dto.UserDto;
+import co.shop.model.dto.*;
 import co.shop.service.SecUserDetailsService;
 import co.shop.security.JwtTokenProvider;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -17,6 +19,8 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @CrossOrigin
@@ -69,4 +73,24 @@ public class AuthController {
         }
     }
 
+    @Api(tags = "Product API")
+    public static interface ProductController {
+        @ApiOperation("Add new data")
+        public ProductDTO save(@RequestBody ProductDTO product);
+
+        @ApiOperation("Find by Id")
+        public ProductDTO findById(@PathVariable("id") Long id);
+
+        @ApiOperation("Delete based on primary key")
+        public void delete(@PathVariable("id") Long id);
+
+        @ApiOperation("Find all data")
+        public List<ProductDTO> list();
+
+        @ApiOperation("Pagination request")
+        public Page<ProductDTO> pageQuery(Pageable pageable);
+
+        @ApiOperation("Update one data")
+        public ProductDTO update(@RequestBody ProductDTO dto, @PathVariable("id") Long id);
+    }
 }

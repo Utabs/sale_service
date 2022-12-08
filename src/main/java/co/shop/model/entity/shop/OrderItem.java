@@ -6,6 +6,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -13,7 +15,6 @@ import java.math.BigDecimal;
 
 @Entity
 @Table(name = "OrderItem")
-@Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class OrderItem implements Serializable {
@@ -31,14 +32,17 @@ public class OrderItem implements Serializable {
     @Column(name = "QTY_SUP", columnDefinition = "int" )
     private Integer qtySupplement;
 
-    @OneToOne
-    @JoinColumn(name = "Product_ID" ,nullable = false)
-    private Product product;
-
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "Order_ID",nullable = false)
-    @JsonIgnore
     private Order order;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "Product_ID",nullable = false)
+    @Fetch(FetchMode.SELECT)
+    @JsonIgnore
+    private Product product;
+
 
 
 }

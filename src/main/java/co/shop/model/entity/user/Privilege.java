@@ -1,5 +1,6 @@
 package co.shop.model.entity.user;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,7 +11,6 @@ import java.util.Collection;
 
 @Table(name = "PRIVILEGE")
 @Entity
-@Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class Privilege {
@@ -20,6 +20,7 @@ public class Privilege {
 
     private String name;
 
+    @JsonIgnore
     @ManyToMany(mappedBy = "privileges")
     private Collection<Role> roles;
 }

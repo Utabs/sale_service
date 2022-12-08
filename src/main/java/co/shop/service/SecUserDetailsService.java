@@ -3,7 +3,7 @@ package co.shop.service;
 
 import co.shop.model.dto.UserDto;
 import co.shop.model.entity.user.JwtUser;
-import co.shop.model.entity.user.User;
+import co.shop.model.entity.user.Users;
 import co.shop.repository.UserRepository;
 import co.shop.security.JwtUserFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,24 +23,24 @@ public class SecUserDetailsService implements UserDetailsService {
 
     @Override
     public JwtUser loadUserByUsername(String loginId) throws UsernameNotFoundException {
-        User tscUser = userRepository.findByUserName(loginId);
-        if (tscUser == null) {
+        Users tscUsers = userRepository.findByUserName(loginId);
+        if (tscUsers == null) {
             throw new UsernameNotFoundException("User not found with username: " + loginId);
         }
-        return JwtUserFactory.create(tscUser);
+        return JwtUserFactory.create(tscUsers);
     }
 
-    public User save(UserDto user) {
-        User newUser = new User();
-        newUser.setName(user.getName());
-        newUser.setFamily(user.getFamily());
-        newUser.setNationalCode(user.getNationalCode());
-        newUser.setEnabled(user.getActive());
-        newUser.setPhone(user.getPhoneNumber());
-        newUser.setUserName(user.getUserName());
-        newUser.setPassword(bcryptEncoder.encode(user.getPassword()));
-        newUser.setCreateDate(null);
-        return userRepository.save(newUser);
+    public Users save(UserDto user) {
+        Users newUsers = new Users();
+        newUsers.setName(user.getName());
+        newUsers.setFamily(user.getFamily());
+        newUsers.setNationalCode(user.getNationalCode());
+        newUsers.setEnabled(user.getActive());
+        newUsers.setPhone(user.getPhoneNumber());
+        newUsers.setUserName(user.getUserName());
+        newUsers.setPassword(bcryptEncoder.encode(user.getPassword()));
+        newUsers.setCreateDate(null);
+        return userRepository.save(newUsers);
     }
 
 }

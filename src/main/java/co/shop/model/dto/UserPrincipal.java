@@ -1,17 +1,17 @@
 package co.shop.model.dto;
 
 
-import co.shop.model.entity.user.User;
+import co.shop.model.entity.user.Users;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 
 public class UserPrincipal implements UserDetails {
-    private User  user;
+    private Users users;
 
-    public UserPrincipal(User user) {
-        this.user = user;
+    public UserPrincipal(Users users) {
+        this.users = users;
     }
 
     @Override

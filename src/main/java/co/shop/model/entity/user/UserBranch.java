@@ -2,6 +2,7 @@ package co.shop.model.entity.user;
 
 import co.shop.model.entity.Branch;
 import co.shop.model.entity.shop.Order;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,7 +12,6 @@ import java.math.BigDecimal;
 
 @Entity
 @Table(name = "UserBranch")
-@Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class UserBranch {
@@ -27,7 +27,7 @@ public class UserBranch {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "User_ID")
-    private User user;
+    private Users users;
 
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "userBranch")
     private Order order;

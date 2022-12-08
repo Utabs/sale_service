@@ -14,7 +14,6 @@ import java.util.Set;
 
 @Entity
 @Table(name = "Customer")
-@Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class Customer implements Serializable {
@@ -24,20 +23,20 @@ public class Customer implements Serializable {
     @Column(name = "ID", nullable = false)
     private Long id;
 
-    @Column(name = "NAME", length = 10,columnDefinition = "VARCHAR(10)")
+    @Column(name = "NAME")//, length = 10,columnDefinition = "VARCHAR(10)")
     private String name;
 
-    @Column(name = "FAMILY", length = 20,columnDefinition = "VARCHAR(20)")
+    @Column(name = "FAMILY")//, length = 20,columnDefinition = "VARCHAR(20)")
     private String family;
 
-    @Column(name = "NATIONAL_CODE", length = 10,columnDefinition = "VARCHAR(10)")
+    @Column(name = "NATIONAL_CODE")//, length = 10,columnDefinition = "VARCHAR(10)")
     private String nationalCode;
 
-    @Column(name = "PHONE", length = 11)
+    @Column(name = "PHONE")//, length = 11)
     private String phone;
 
     @Column(name = "CREATE_DATE")
-    private Timestamp createDate;
+    private Instant createDate;
 
     @Column(name = "UPDATE_DATE")
     private Instant updateDate;
