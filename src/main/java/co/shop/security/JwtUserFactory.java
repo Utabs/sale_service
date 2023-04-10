@@ -25,7 +25,7 @@ public final class JwtUserFactory {
                 users.getFamily(),
                 users.getNationalCode(),
                 users.getPassword(),
-                mapToGrantedAuthorities(users.getRoles()),true,new Date() );
+                mapToGrantedAuthorities(users.getUserRoles().stream().map(x->x.getRole()).collect(Collectors.toList())),true,new Date() );
     }
 
     private static List<GrantedAuthority> mapToGrantedAuthorities(Collection<Role> authorities) {

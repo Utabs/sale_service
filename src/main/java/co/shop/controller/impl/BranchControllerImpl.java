@@ -1,5 +1,6 @@
-package co.shop.controller;
+package co.shop.controller.impl;
 
+import co.shop.controller.BranchController;
 import co.shop.model.dto.BranchDTO;
 import co.shop.model.entity.Branch;
 import co.shop.model.mapper.BranchMapper;
@@ -14,6 +15,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RequestMapping("/api/branch")
+@CrossOrigin(origins =  {"http://192.168.1.2:4200","http://localhost:4200","192.168.1.2:8080","http://192.168.137.147"})
 @RestController
 public class BranchControllerImpl implements BranchController {
     private final BranchService branchService;
@@ -40,10 +42,24 @@ public class BranchControllerImpl implements BranchController {
     }
 
     @Override
+    @GetMapping("/code/{code}")
+    public BranchDTO findByBranchCode(@PathVariable("code") Integer code) {
+        Branch branch = branchService.findByBranchCode(code).orElse(null);
+        return branchMapper.asDTO(branch);
+    }
+
+    @Override
     @DeleteMapping("/{id}")
     public void delete(@PathVariable("id") Integer id) {
         branchService.deleteById(id);
     }
+
+    @Override
+    @DeleteMapping("/code/{code}")
+    public void deleteByCode(@PathVariable("code") Integer code) {
+        branchService.deleteByCode(code);
+    }
+
 
     @Override
     @GetMapping

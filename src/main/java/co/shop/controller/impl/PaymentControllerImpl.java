@@ -1,5 +1,6 @@
-package co.shop.controller;
+package co.shop.controller.impl;
 
+import co.shop.controller.PaymentController;
 import co.shop.model.dto.PaymentDTO;
 import co.shop.model.mapper.PaymentMapper;
 import co.shop.service.PaymentService;

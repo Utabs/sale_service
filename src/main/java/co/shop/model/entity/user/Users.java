@@ -6,7 +6,6 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.sql.Timestamp;
 import java.time.Instant;
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -15,8 +14,8 @@ import java.util.Set;
 @Table(name = "Users",uniqueConstraints = {@UniqueConstraint(name = "UC_UNAME",columnNames = {"USER_NAME"})})
 @AllArgsConstructor
 @NoArgsConstructor
-@Setter
-@Getter
+@Data
+@ToString
 public class Users implements Serializable {
 
     @Id
@@ -24,10 +23,26 @@ public class Users implements Serializable {
     @Column(name = "ID", nullable = false)
     private Long id;
 
+    @Column(name = "USER_NAME", length = 64)
+    private String userName;
+
+    @Column(name = "PASSWORD", length = 200)
+    private String password;
+
+    @Column(name = "OTP_PASSWORD", length = 100)
+    private String oneTimePassword;
+
+    @Column(name = "OTP_REQ_TIME")
+    private Instant otpRequestedTime;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "PERSON_FK")
+    private Person person;
+
     @Column(name = "CREATE_DATE")
     private Instant createDate;
 
-    @Column(name = "ENABLED")
+    @Column(name = "enabled")
     private Boolean enabled;
 
     @Column(name = "FAMILY", length = 20)
@@ -39,8 +54,6 @@ public class Users implements Serializable {
     @Column(name = "NATIONAL_CODE", length = 10)
     private String nationalCode;
 
-    @Column(name = "PASSWORD", length = 200)
-    private String password;
 
     @Column(name = "PHONE", length = 11)
     private String phone;
@@ -51,18 +64,9 @@ public class Users implements Serializable {
     @Column(name = "UPDATE_DATE")
     private Instant updateDate;
 
-    @Column(name = "USER_NAME", length = 20)
-    private String userName;
-
-    @JsonIgnore
     @OneToMany(mappedBy = "users")
-    private Set<UserBranch> userBranches = new LinkedHashSet<>();
+    private Set<UserRole> userRoles;
 
-    @JsonIgnore
-    @ManyToMany
-    @JoinTable(name = "UserRole",
-            joinColumns = @JoinColumn(name = "USER_ID"),
-            inverseJoinColumns = @JoinColumn(name = "ROLE_ID"))
-    private Set<Role> roles = new LinkedHashSet<>();
+
 
 }

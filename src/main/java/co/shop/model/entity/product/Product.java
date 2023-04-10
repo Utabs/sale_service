@@ -6,12 +6,14 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.Instant;
+import java.util.Objects;
 
 
 @Entity
 @Table(name = "Product")
 @AllArgsConstructor
 @NoArgsConstructor
+@Data
 public class Product implements Serializable {
 
     @Id
@@ -39,12 +41,6 @@ public class Product implements Serializable {
 
     @Column(name = "DESCRIPTION",columnDefinition = "NVARCHAR(1500)")
     private String description;
-
-    @Column(name = "createBy")
-    private Integer createBy;
-
-    @Column(name = "createDateTime")
-    private Instant createDateTime;
 
     @Column(name = "eName")
     private String eName;
@@ -76,13 +72,30 @@ public class Product implements Serializable {
     @Column(name = "summary", length = 500)
     private String summary;
 
+    @Column(name = "createBy")
+    private Integer createBy;
+
+    @Column(name = "createDateTime")
+    private Instant createDateTime;
+
     @Column(name = "updateBy")
     private Integer updateBy;
 
     @Column(name = "updateDateTime")
     private Instant updateDateTime;
 
-    @Column(name = "productCategoryId", precision = 19)
-    private BigDecimal productCategoryId;
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Product)) return false;
+        Product product = (Product) o;
+        return id.equals(product.id);
     }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
+
+}

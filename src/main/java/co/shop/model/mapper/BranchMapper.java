@@ -7,6 +7,9 @@ import org.mapstruct.Mapping;
 
 @Mapper(componentModel = "spring", uses = ReferenceMapper.class)
 public interface BranchMapper extends GenericMapper<Branch, BranchDTO> {
+
+    //    To skip several properties in a particular mapping method,
+    @Mapping(target = "userBranches", ignore = true)
     @Override
     Branch asEntity(BranchDTO dto);
 }

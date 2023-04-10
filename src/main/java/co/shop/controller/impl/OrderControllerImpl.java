@@ -1,5 +1,6 @@
-package co.shop.controller;
+package co.shop.controller.impl;
 
+import co.shop.controller.OrderController;
 import co.shop.model.dto.OrderDTO;
 import co.shop.model.mapper.OrderMapper;
 import co.shop.service.OrderService;

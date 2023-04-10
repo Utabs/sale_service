@@ -1,5 +1,6 @@
 package co.shop.controller;
 
+import co.shop.controller.impl.ProductControllerImpl;
 import co.shop.model.mapper.ProductMapper;
 import co.shop.model.mapper.ReferenceMapper;
 import co.shop.service.ProductService;

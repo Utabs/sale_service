@@ -61,4 +61,12 @@ public class ProductServiceImpl implements ProductService {
         }
         return null;
     }
+
+    public Product updateByCode(Product entity, Long code) {
+        Optional<Product> optional = findById(code) ;
+        if (optional.isPresent()) {
+            return save(entity);
+        }
+        return null;
+    }
 }

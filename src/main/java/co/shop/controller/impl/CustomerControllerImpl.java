@@ -1,5 +1,6 @@
-package co.shop.controller;
+package co.shop.controller.impl;
 
+import co.shop.controller.CustomerController;
 import co.shop.model.dto.CustomerDTO;
 import co.shop.model.entity.Customer;
 import co.shop.model.mapper.CustomerMapper;

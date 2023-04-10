@@ -1,5 +1,6 @@
 package co.shop.controller;
 
+import co.shop.controller.impl.PaymentControllerImpl;
 import co.shop.model.mapper.PaymentMapper;
 import co.shop.model.mapper.ReferenceMapper;
 import co.shop.service.PaymentService;

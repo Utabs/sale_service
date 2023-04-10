@@ -1,7 +1,8 @@
 package co.shop.service;
 
-import co.shop.model.entity.user.Users;
 import co.shop.repository.UsersRepository;
+import co.shop.service.UsersService;
+import co.shop.model.entity.user.Users;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
@@ -12,7 +13,6 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-@Transactional
 public class UsersServiceImpl implements UsersService {
     private final UsersRepository repository;
 
@@ -54,7 +54,7 @@ public class UsersServiceImpl implements UsersService {
 
     @Override
     public Users update(Users entity, Long id) {
-        Optional<Users> optional = findById(id);
+        Optional<Users> optional = findById(id) ;
         if (optional.isPresent()) {
             return save(entity);
         }

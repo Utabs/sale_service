@@ -9,5 +9,6 @@ import org.mapstruct.Mapping;
 @Mapper(componentModel = "spring", uses = ReferenceMapper.class)
 public interface UsersMapper extends GenericMapper<Users, UsersDTO> {
     @Override
+    @Mapping(target = "id", ignore = false)
     Users asEntity(UsersDTO dto);
 }

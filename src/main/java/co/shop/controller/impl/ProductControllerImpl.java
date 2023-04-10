@@ -1,5 +1,6 @@
-package co.shop.controller;
+package co.shop.controller.impl;
 
+import co.shop.controller.ProductController;
 import co.shop.model.dto.ProductDTO;
 import co.shop.model.entity.product.Product;
 import co.shop.model.mapper.ProductMapper;
@@ -14,6 +15,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RequestMapping("/api/product")
+@CrossOrigin(origins =  {"http://192.168.1.2:4200","http://localhost:4200","192.168.1.2:8080","http://192.168.137.147"})
 @RestController
 public class ProductControllerImpl implements ProductController {
     private final ProductService productService;

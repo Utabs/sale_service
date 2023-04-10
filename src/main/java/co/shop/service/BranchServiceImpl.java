@@ -37,8 +37,19 @@ public class BranchServiceImpl implements BranchService {
     }
 
     @Override
+    public void deleteByCode(Integer code) {
+        repository.deleteByCode(code);
+    }
+
+
+    @Override
     public Optional<Branch> findById(Integer id) {
         return repository.findById(id);
+    }
+
+    @Override
+    public Optional<Branch> findByBranchCode(Integer Code) {
+        return repository.findByBranchCode (Code);
     }
 
     @Override
@@ -57,6 +68,15 @@ public class BranchServiceImpl implements BranchService {
     public Branch update(Branch entity, Integer id) {
         Optional<Branch> optional = findById(id);
         if (optional.isPresent()) {
+            return save(entity);
+        }
+        return null;
+    }
+
+    public Branch updateByCode(Branch entity, Integer code) {
+        Optional<Branch> optional = findByBranchCode(code);
+        if (optional.isPresent()) {
+            entity.setId(optional.get().getId());
             return save(entity);
         }
         return null;

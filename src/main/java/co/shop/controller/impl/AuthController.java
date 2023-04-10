@@ -1,4 +1,4 @@
-package co.shop.controller;
+package co.shop.controller.impl;
 
 import co.shop.model.dto.*;
 import co.shop.service.SecUserDetailsService;

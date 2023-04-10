@@ -2,17 +2,18 @@ package co.shop.model.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 
 import java.math.BigDecimal;
 import java.time.Instant;
+import java.util.Objects;
 
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
+@EqualsAndHashCode
 public  class ProductDTO extends  AbstractDTO<Long> {
     private Long id;
     private String code;
@@ -22,8 +23,6 @@ public  class ProductDTO extends  AbstractDTO<Long> {
     private BigDecimal buyPrice;
     private Integer quantityInStock;
     private String description;
-    private Integer createBy;
-    private Instant createDateTime;
     private String eName;
     private Boolean enabled;
     private String imgUrl;
@@ -34,9 +33,11 @@ public  class ProductDTO extends  AbstractDTO<Long> {
     private Integer price4;
     private Integer setLevel;
     private String summary;
+    private Integer createBy;
+    private Instant createDateTime;
     private Integer updateBy;
     private Instant updateDateTime;
-    private BigDecimal productCategoryId;
+
 
 
 }

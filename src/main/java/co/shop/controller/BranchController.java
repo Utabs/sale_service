@@ -18,8 +18,14 @@ public interface BranchController {
     @ApiOperation("Find by Id")
     BranchDTO findById(@PathVariable("id") Integer id);
 
+    @ApiOperation("Find by BranchCode")
+    BranchDTO findByBranchCode(@PathVariable("code") Integer code);
+
     @ApiOperation("Delete based on primary key")
     void delete(@PathVariable("id") Integer id);
+
+    @ApiOperation("Delete based on Branch Code")
+    void deleteByCode(@PathVariable("code") Integer code);
 
     @ApiOperation("Find all data")
     List<BranchDTO> list();

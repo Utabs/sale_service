@@ -1,5 +1,6 @@
-package co.shop.controller;
+package co.shop.controller.impl;
 
+import co.shop.controller.MenuController;
 import co.shop.model.dto.MenuDTO;
 import co.shop.model.mapper.MenuMapper;
 import co.shop.model.entity.menu.Menu;

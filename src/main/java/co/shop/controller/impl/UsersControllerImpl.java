@@ -1,5 +1,6 @@
-package co.shop.controller;
+package co.shop.controller.impl;
 
+import co.shop.controller.UsersController;
 import co.shop.model.dto.UsersDTO;
 import co.shop.model.mapper.UsersMapper;
 import co.shop.service.UsersService;
