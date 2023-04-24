@@ -10,19 +10,19 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@EqualsAndHashCode
 @ToString
+@EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
 public class UserRole {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID", nullable = false)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne()
     @JoinColumn(name = "USER_FK")
     private Users users;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne()
     @JoinColumn(name = "ROLE_FK")
     private Role role;
 

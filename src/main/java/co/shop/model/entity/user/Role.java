@@ -32,7 +32,7 @@ public class Role {
     @JsonIgnore
     private Set<RolePrivileges> rolePrivileges;
 
-    @OneToMany(mappedBy = "role")
+    @OneToMany(mappedBy = "role",fetch = FetchType.EAGER)
     @ToString.Exclude
     private Set<UserRole> userRoles;
 

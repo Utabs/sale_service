@@ -15,6 +15,7 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
+@EqualsAndHashCode
 @ToString
 public class Users implements Serializable {
 
@@ -60,8 +61,8 @@ public class Users implements Serializable {
     @Column(name = "UPDATE_DATE")
     private Instant updateDate;
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "users",fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "users",fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+    @ToString.Exclude
     private Set<UserRole> userRoles;
 
 

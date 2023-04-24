@@ -11,7 +11,6 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode
 public class UserRoleDTO extends AbstractDTO<Long> {
     private Long id;
     private Users users;
