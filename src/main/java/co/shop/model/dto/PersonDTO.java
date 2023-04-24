@@ -14,7 +14,7 @@ import java.time.Instant;
 @EqualsAndHashCode
 public class PersonDTO extends AbstractDTO<Long> {
     private Long id;
-    private String userName;
+    private Long user_fk;
     private String uuid;
     private Boolean enabled;
     private Long createBy;

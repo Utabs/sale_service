@@ -10,7 +10,7 @@ import java.time.Instant;
 import java.util.UUID;
 
 @Entity
-@Table(name = "Person", uniqueConstraints = {@UniqueConstraint(name = "UC_UNAME",columnNames = {"USER_NAME"}),
+@Table(name = "Person", uniqueConstraints = {
         @UniqueConstraint(name = "UC_UUID",columnNames = {"USER_UUID"})}
 
 )
@@ -30,6 +30,9 @@ public class Person {
     @Column(name = "USER_NAME")
     private String userName;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "USER_FK")
+    private Users users;
 
     @Column(name = "ENABLED",columnDefinition = "bit default 0")
     private Boolean enabled;

@@ -18,6 +18,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -37,16 +38,13 @@ public class AuthController {
 
     //    @RolesAllowed(Role.AUTHOR_ADMIN)
     @RequestMapping(value = "/authenticate", method = RequestMethod.POST)
-    public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtRequest authRequest) throws AuthenticationException {
-        UsernamePasswordAuthenticationToken authReqToken = new UsernamePasswordAuthenticationToken(authRequest.getUserName(), authRequest.getPassword());
-        Authentication authenticate = authenticationManager.authenticate(authReqToken);
-//        if (authenticate.isAuthenticated())
-        SecurityContext sc =SecurityContextHolder.getContext();
-        sc.setAuthentication(authenticate);
+    public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtRequest authenticationRequest) throws Exception {
+        authenticate(authenticationRequest.getUserName(), authenticationRequest.getPassword());
 
-//        final JwtUser userDetails = userDetailsService.loadUserByUsername(authRequest.getUserName());
+        final UserDetails userDetails = userDetailsService
+                .loadUserByUsername(authenticationRequest.getUserName());
 
-        final String token = jwtTokenUtil.generateToken(authenticate );
+        final String token = jwtTokenUtil.generateToken(userDetails);
 
         return ResponseEntity.ok(new JwtResponse(token));
     }

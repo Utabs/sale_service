@@ -35,10 +35,6 @@ public class Users implements Serializable {
     @Column(name = "OTP_REQ_TIME")
     private Instant otpRequestedTime;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "PERSON_FK")
-    private Person person;
-
     @Column(name = "CREATE_DATE")
     private Instant createDate;
 
@@ -64,7 +60,8 @@ public class Users implements Serializable {
     @Column(name = "UPDATE_DATE")
     private Instant updateDate;
 
-    @OneToMany(mappedBy = "users")
+    @JsonIgnore
+    @OneToMany(mappedBy = "users",fetch = FetchType.LAZY)
     private Set<UserRole> userRoles;
 
 

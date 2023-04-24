@@ -56,24 +56,29 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         // We don't need CSRF for this example
-        httpSecurity.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class)
-                .csrf().disable()
-                .authorizeRequests().antMatchers("/**","/api/sales/**","/authenticate", "/register").permitAll().anyRequest()
+        httpSecurity.csrf().disable()
                 // dont authenticate this particular request
-//                .authorizeRequests().antMatchers("/**","/authenticate", "/register")
+                .authorizeRequests().antMatchers("/authenticate", "/register", "/v2/api-docs", "/v3/api-docs/**", "/swagger-ui-custom.html",
+                       "/api/users",
+                       "/api/person",
+                        "/actuator/**",
+                        "/hello",
+                        "/configuration/ui",
+                        "/swagger-resources/**",
+                        "/configuration/security",
+                        "/swagger-ui.html",
+                        "/webjars/**", "/swagger-ui/**"
+                ).permitAll().
                 // all other requests need to be authenticated
-//                .permitAll().anyRequest()
-                .authenticated().and()
+                        anyRequest().authenticated().and().
                 // make sure we use stateless session; session won't be used to
                 // store user's state.
-                .exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint).and()
-                .sessionManagement()
+                        exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint).and().sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
+
+        // Add a filter to validate the tokens with every request
+        httpSecurity.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
     }
-//    @Bean
-//    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-//        http.cors().disable()
-//    }
 
 }
