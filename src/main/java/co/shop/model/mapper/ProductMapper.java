@@ -11,8 +11,6 @@ import java.util.List;
 @Mapper(componentModel = "spring", uses = ReferenceMapper.class)
 public interface ProductMapper extends GenericMapper<Product, ProductDTO> {
     @Override
-    @Mapping(target = "id", source = "id")
-    @Mapping(target = "code", source = "code")
     Product asEntity(ProductDTO dto);
 
 //    @InheritInverseConfiguration

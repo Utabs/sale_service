@@ -11,8 +11,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "Product")
-@AllArgsConstructor
-@NoArgsConstructor
+@RequiredArgsConstructor
 @Data
 public class Product implements Serializable {
 
@@ -55,21 +54,21 @@ public class Product implements Serializable {
     private Integer ordering;
 
     @Column(name = "price1")
-    private Integer price1;
+    private Integer price1=0;
 
-    @Column(name = "price2")
-    private Integer price2;
+    @Column(name = "price2",columnDefinition = "0")
+    private Integer price2=0;
 
-    @Column(name = "price3")
-    private Integer price3;
+    @Column(name = "price3",columnDefinition = "0")
+    private Integer price3=0;
 
-    @Column(name = "price4")
-    private Integer price4;
+    @Column(name = "price4",columnDefinition = "0")
+    private Integer price4=0;
 
     @Column(name = "setLevel")
     private Integer setLevel;
 
-    @Column(name = "summary", length = 500)
+    @Column(name = "summary", columnDefinition = "NVARCHAR(500)")
     private String summary;
 
     @Column(name = "createBy")
@@ -84,18 +83,16 @@ public class Product implements Serializable {
     @Column(name = "updateDateTime")
     private Instant updateDateTime;
 
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Product)) return false;
         Product product = (Product) o;
-        return id.equals(product.id);
+        return code.equals(product.code);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return Objects.hash(id, code, categoryId, name, vendor, buyPrice, quantityInStock, description, eName, enabled, imgUrl, ordering, price1, price2, price3, price4, setLevel, summary, createBy, createDateTime, updateBy, updateDateTime);
     }
-
 }

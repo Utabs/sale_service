@@ -1,6 +1,7 @@
 package co.shop.controller;
 
-import co.shop.model.dto.OrderItemDTO;
+import co.shop.model.dto.OrderItemDto;
+import co.shop.model.entity.shop.OrderItem;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.data.domain.Page;
@@ -13,20 +14,21 @@ import java.util.List;
 @Api(tags = "OrderItem API")
 public interface OrderItemController {
     @ApiOperation("Add new data")
-    OrderItemDTO save(@RequestBody OrderItemDTO orderItem);
+    OrderItemDto save(@RequestBody OrderItemDto orderItem);
 
     @ApiOperation("Find by Id")
-    OrderItemDTO findById(@PathVariable("id") Long id);
+    OrderItemDto findById(@PathVariable("id") Long id);
 
     @ApiOperation("Delete based on primary key")
-    void delete(@PathVariable("id") Long id);
+    OrderItemDto delete(@PathVariable("id") Long id);
 
     @ApiOperation("Find all data")
-    List<OrderItemDTO> list();
+    List<OrderItemDto> list();
 
     @ApiOperation("Pagination request")
-    Page<OrderItemDTO> pageQuery(Pageable pageable);
+    Page<OrderItemDto> pageQuery(Pageable pageable);
 
     @ApiOperation("Update one data")
-    OrderItemDTO update(@RequestBody OrderItemDTO dto, @PathVariable("id") Long id);
+    OrderItemDto update(@RequestBody OrderItemDto dto, @PathVariable("id") Long id);
+
 }

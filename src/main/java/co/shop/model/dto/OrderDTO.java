@@ -1,30 +1,28 @@
 package co.shop.model.dto;
 
-import co.shop.model.entity.Customer;
-import co.shop.model.entity.shop.OrderItem;
 import co.shop.model.entity.shop.Payment;
-import co.shop.model.entity.user.UserBranch;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import lombok.*;
 
 import java.util.List;
+import java.util.Objects;
 
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
+@RequiredArgsConstructor
+@EqualsAndHashCode
 public class OrderDTO extends AbstractDTO<Long> {
-    @JsonIgnore
+
     private Long id;
-    private String codeNum;
+    private String code;
     private Integer orderDate;
     private Integer requireDate;
-    private Integer orderStatus;
-    private String orderComment;
-    private List<OrderItem> orderItems;
+    private Integer status;
+    private String comment;
+    private List<OrderItemDto> orderItems;
     private List<Payment> payments;
-    private UserBranch userBranch;
-    private Customer customer;
+    private long userBranchId;
+    private CustomerDTO customer;
+
+
 
 }

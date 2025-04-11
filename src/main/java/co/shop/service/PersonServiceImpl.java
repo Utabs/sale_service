@@ -1,14 +1,12 @@
 package co.shop.service;
 
+import co.shop.model.entity.user.Customer;
 import co.shop.repository.PersonRepository;
-import co.shop.service.PersonService;
-import co.shop.model.entity.user.Person;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,13 +19,13 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
-    public Person save(Person entity) {
+    public Customer save(Customer entity) {
         return repository.save(entity);
     }
 
     @Override
-    public List<Person> save(List<Person> entities) {
-        return (List<Person>) repository.saveAll(entities);
+    public List<Customer> save(List<Customer> entities) {
+        return (List<Customer>) repository.saveAll(entities);
     }
 
     @Override
@@ -36,25 +34,32 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
-    public Optional<Person> findById(Long id) {
+    public Customer deleteByIdData(Long id) {
+        return null;
+    }
+
+    @Override
+    public Optional<Customer> findById(Long id) {
         return repository.findById(id);
     }
 
     @Override
-    public List<Person> findAll() {
-        return (List<Person>) repository.findAll();
+    public List<Customer> findAll() {
+        return (List<Customer>) repository.findAll();
     }
 
+
+
     @Override
-    public Page<Person> findAll(Pageable pageable) {
-        Page<Person> entityPage = repository.findAll(pageable);
-        List<Person> entities = entityPage.getContent();
+    public Page<Customer> findAll(Pageable pageable) {
+        Page<Customer> entityPage = repository.findAll(pageable);
+        List<Customer> entities = entityPage.getContent();
         return new PageImpl<>(entities, pageable, entityPage.getTotalElements());
     }
 
     @Override
-    public Person update(Person entity, Long id) {
-        Optional<Person> optional = findById(id) ;
+    public Customer update(Customer entity, Long id) {
+        Optional<Customer> optional = findById(id) ;
         if (optional.isPresent()) {
             return save(entity);
         }
@@ -62,7 +67,7 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
-    public Optional<Person> findByUserName(String userName) {
+    public Optional<Customer> findByUserName(String userName) {
         return  repository.findByUserName(userName);
     }
 }

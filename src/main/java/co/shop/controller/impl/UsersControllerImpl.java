@@ -3,6 +3,7 @@ package co.shop.controller.impl;
 import co.shop.controller.UsersController;
 import co.shop.model.dto.UsersDTO;
 import co.shop.model.mapper.UsersMapper;
+import co.shop.repository.UsersRepository;
 import co.shop.service.UsersService;
 import co.shop.model.entity.user.Users;
 import org.springframework.data.domain.Page;
@@ -17,10 +18,10 @@ import java.util.stream.Collectors;
 @RequestMapping("/api/users")
 @RestController
 public class UsersControllerImpl implements UsersController {
-    private final UsersService usersService;
+    private final UsersRepository usersService;
     private final UsersMapper usersMapper;
 
-    public UsersControllerImpl(UsersService usersService, UsersMapper usersMapper) {
+    public UsersControllerImpl(UsersRepository usersService, UsersMapper usersMapper) {
         this.usersService = usersService;
         this.usersMapper = usersMapper;
     }
@@ -49,7 +50,7 @@ public class UsersControllerImpl implements UsersController {
     @Override
     @GetMapping
     public List<UsersDTO> list() {
-        return usersMapper.asDTOList(usersService.findAll());
+        return usersMapper.asDTOList((List<Users>) usersService.findAll());
     }
 
     @Override
@@ -66,6 +67,6 @@ public class UsersControllerImpl implements UsersController {
     @PutMapping("/{id}")
     public UsersDTO update(@RequestBody UsersDTO usersDTO, @PathVariable("id") Long id) {
         Users users = usersMapper.asEntity(usersDTO);
-        return usersMapper.asDTO(usersService.update(users, id));
+        return usersMapper.asDTO(usersService.save(users));
     }
 }

@@ -1,6 +1,7 @@
 package co.shop.controller;
 
 import co.shop.model.dto.CustomerDTO;
+import co.shop.model.dto.OrderDTO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.data.domain.Page;
@@ -31,4 +32,9 @@ public interface CustomerController {
 
     @ApiOperation("Update one data")
     CustomerDTO update(@RequestBody CustomerDTO dto, @PathVariable("id") Long id);
+
+    @ApiOperation("Find By UserName")
+    public CustomerDTO find(@PathVariable("username") String username);
+
+
 }

@@ -1,9 +1,7 @@
 package co.shop.model.mapper;
 
 import co.shop.model.dto.CustomerDTO;
-import co.shop.model.dto.ProductDTO;
-import co.shop.model.entity.Customer;
-import co.shop.model.entity.product.Product;
+import co.shop.model.entity.user.Customer;
 import org.mapstruct.*;
 
 @Mapper(componentModel = "spring", uses = ReferenceMapper.class)

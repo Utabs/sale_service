@@ -3,11 +3,11 @@ package co.shop.model.entity.shop;
 
 import co.shop.model.entity.product.Product;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -15,8 +15,8 @@ import java.math.BigDecimal;
 
 @Entity
 @Table(name = "OrderItem")
-@AllArgsConstructor
-@NoArgsConstructor
+@RequiredArgsConstructor
+@Data
 public class OrderItem implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,17 +32,16 @@ public class OrderItem implements Serializable {
     @Column(name = "QTY_SUP", columnDefinition = "int" )
     private Integer qtySupplement;
 
-    @JsonIgnore
+    @ToString.Exclude
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "Order_ID",nullable = false)
+//    @OnDelete(action = OnDeleteAction.CASCADE)
+//    @Fetch(FetchMode.SELECT)
     private Order order;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false,cascade = CascadeType.PERSIST)
     @JoinColumn(name = "Product_ID",nullable = false)
-    @Fetch(FetchMode.SELECT)
-    @JsonIgnore
+//    @Fetch(FetchMode.SELECT)
     private Product product;
-
-
 
 }

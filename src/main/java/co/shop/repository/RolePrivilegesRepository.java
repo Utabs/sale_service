@@ -5,9 +5,9 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 
-@Repository
-public interface RolePrivilegesRepository extends PagingAndSortingRepository<RolePrivileges, Long> {
-    @Override
-    @Query("select a from RolePrivileges a JOIN FETCH a.privilege JOIN FETCH  a.role ")
-    Iterable<RolePrivileges> findAll();
+//@Repository
+public interface RolePrivilegesRepository{//} extends PagingAndSortingRepository<RolePrivileges, Long> {
+//    @Override
+//    @Query("select a from RolePrivileges a JOIN FETCH a.privilege JOIN FETCH  a.role ")
+//    Iterable<RolePrivileges> findAll();
 }

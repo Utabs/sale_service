@@ -15,7 +15,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RequestMapping("/api/product")
-@CrossOrigin(origins =  {"http://192.168.1.2:4200","http://localhost:4200","192.168.1.2:8080","http://192.168.137.147"})
+//@CrossOrigin(origins =  {"http://192.168.1.2:4200","http://localhost:4200","192.168.1.2:8080","http://192.168.137.147"})
+@CrossOrigin(origins = "*")
 @RestController
 public class ProductControllerImpl implements ProductController {
     private final ProductService productService;
@@ -66,6 +67,7 @@ public class ProductControllerImpl implements ProductController {
     @Override
     @PutMapping("/{id}")
     public ProductDTO update(@RequestBody ProductDTO productDTO, @PathVariable("id") Long id) {
+        productDTO.setId(id);
         Product product = productMapper.asEntity(productDTO);
         return productMapper.asDTO(productService.update(product, id));
     }

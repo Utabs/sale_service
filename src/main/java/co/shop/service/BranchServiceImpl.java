@@ -8,6 +8,7 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.PostConstruct;
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
@@ -41,6 +42,10 @@ public class BranchServiceImpl implements BranchService {
         repository.deleteByCode(code);
     }
 
+    @Override
+    public Branch deleteByIdData(Integer id) {
+        return null;
+    }
 
     @Override
     public Optional<Branch> findById(Integer id) {

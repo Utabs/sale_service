@@ -24,6 +24,7 @@ import java.util.List;
 
 @RestController
 @CrossOrigin
+@RequestMapping(path = "/api/v1")
 public class AuthController {
 
     @Autowired

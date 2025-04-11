@@ -2,5 +2,6 @@ package co.shop.service;
 
 import co.shop.model.entity.user.Users;
 
-public interface UsersService extends GenericService<Users, Long> {
+public interface UsersService  {
+    Users findByUserName(String loginId);
 }

@@ -1,18 +1,17 @@
 package co.shop.model.entity.shop;
 
 
-import co.shop.model.entity.Customer;
+import co.shop.model.entity.user.Customer;
 import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
 @Table(name = "Payments")
-@AllArgsConstructor
-@NoArgsConstructor
+@RequiredArgsConstructor
 public class Payment implements Serializable {
 
     @Id
@@ -21,7 +20,7 @@ public class Payment implements Serializable {
     private Long id;
 
     @Column(name = "CODE_NUM")//, columnDefinition = "nvarchar(20)")
-    private String codeNum;
+    private String code;
 
     @Column(name = "PAYMENT_DATE")
     private Integer paymentDate;

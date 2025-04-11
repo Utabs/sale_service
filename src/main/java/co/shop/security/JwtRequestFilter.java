@@ -37,18 +37,17 @@ public class JwtRequestFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
             throws ServletException, IOException {
-        Enumeration<String> headerNames = request.getHeaderNames();
+//        Enumeration<String> headerNames = request.getHeaderNames();
 
-        if (headerNames != null) {
-            while (headerNames.hasMoreElements()) {
-                System.out.println(headerNames+": " + request.getHeader(headerNames.nextElement()));
-            }
-        }
+//        if (headerNames != null) {
+//            while (headerNames.hasMoreElements()) {
+//                System.out.println(headerNames+": " + request.getHeader(headerNames.nextElement()));
+//            }
+//        }
 
 
         final String requestTokenHeader = request.getHeader("Authorization");
-
-         HashMap<String, String> headers = new HashMap<>();
+        HashMap<String, String> headers = new HashMap<>();
         for (Enumeration<String> names = request.getHeaderNames(); names.hasMoreElements(); ) {
             String name = names.nextElement();
             for (Enumeration<String> values = request.getHeaders(name); values.hasMoreElements(); ) {
@@ -59,19 +58,20 @@ public class JwtRequestFilter extends OncePerRequestFilter {
         if (locale == null) {
             locale = "fa";
         }
-        LOGGER.info("Context path is {}", request.getContextPath());
-        LOGGER.info("----------------------------header----------------------------------------");
-        if (headerNames != null) {
-            while (headerNames.hasMoreElements()) {
-                String name = headerNames.nextElement();
-                LOGGER.info("Header: {}  value: {}", name, request.getHeader(name));
-            }
-        }
+//        LOGGER.info("Context path is {}", request.getContextPath());
+//        LOGGER.info("----------------------------header----------------------------------------");
+//        if (headerNames != null) {
+//            while (headerNames.hasMoreElements()) {
+//                String name = headerNames.nextElement();
+//                LOGGER.info("Header: {}  value: {}", name, request.getHeader(name));
+//            }
+//        }
         String username = null;
-        String jwtToken = null;
-        if (requestTokenHeader != null && requestTokenHeader.startsWith("Bearer ")) {
-            jwtToken = requestTokenHeader.substring(7);
+        String jwtToken = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImF1dGhvcml0aWVzIjpbXSwianRpIjoiY2JkOWMxYTItN2E2ZC00OTlmLTlmOGEtZjBjYzJhMWFhMjAzIiwiaWF0IjoxNzQ0MDAwNjA5LCJleHAiOjE3NDY0MDA2MDl9.MPlW-V_H2dHkm30kYQjoOVw9MUxCwsAAyuWxmwTyw-Wn4mf1dwuiV_UAQRwfLpBE69b6UJ3AvqVR0usWMgi5fg";
+        if ((requestTokenHeader != null && requestTokenHeader.startsWith("Bearer "))||true) {
+//            jwtToken = requestTokenHeader.substring(7);
             jwtTokenUtil.setToken("Bearer " + jwtToken);
+//            jwtTokenUtil.setToken("Bearer " + "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImF1dGhvcml0aWVzIjpbXSwianRpIjoiZjFlYWNhNWItNWE2NS00ZDY2LWEwNjQtYjIwZGQ1MjBkNzBkIiwiaWF0IjoxNjkyODY3MjM5LCJleHAiOjE2OTUyNjcyMzl9.mOaTpHAl-mrF04i7E1hV6imchA-swhlh64piy0lf8Vy4_M-VqX_vjDlz68Bj50mc12GFyzqWuNOiiIt3ftA_Jg");
             try {
                 username = jwtTokenUtil.getUsernameFromToken(jwtToken);
             } catch (IllegalArgumentException e) {

@@ -23,7 +23,7 @@ public class JwtTokenProvider implements Serializable {
 
     private static final long serialVersionUID = -7550185165626007488L;
 
-    public static final long JWT_TOKEN_VALIDITY = 40 * 60;
+    public static final long JWT_TOKEN_VALIDITY = 40 * 60000;
 
     static final String CLAIM_KEY_USERNAME = "sub";
     static final String CLAIM_KEY_AUDIENCE = "aud";
@@ -105,13 +105,11 @@ public class JwtTokenProvider implements Serializable {
     }
 
     private String doGenerateToken(String authorities,Authentication authentication, String audience) {
-        Map<String, Object> claims = new HashMap<>();
-        claims.put("isUser", true);
+        Claims claims = Jwts.claims().setSubject(authentication.getName());
+        claims.put("authorities", authentication.getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(Collectors.toList()));
         return Jwts.builder()
-                .claim("roles",authorities)
                 .setClaims(claims)
                 .setId(UUID.randomUUID().toString())
-                .setSubject(authentication.getName())
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + JWT_TOKEN_VALIDITY * 1000))
                 .signWith(SignatureAlgorithm.HS512, secret)

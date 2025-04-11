@@ -1,6 +1,6 @@
 package co.shop.model.dto;
 
-import co.shop.model.entity.user.Person;
+import co.shop.model.entity.user.Customer;
 import co.shop.model.entity.user.UserRole;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -18,7 +18,7 @@ import java.util.Set;
 @EqualsAndHashCode
 public class UsersDTO extends AbstractDTO<Long> {
     private Long id;
-    private Person person;
+    private Customer customer;
     private Instant createDate;
     private Boolean enabled;
     private String family;

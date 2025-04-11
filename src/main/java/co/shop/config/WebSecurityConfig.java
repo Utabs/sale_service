@@ -57,8 +57,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         // We don't need CSRF for this example
         httpSecurity.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class)
-                .csrf().disable()
-                .authorizeRequests().antMatchers("/**","/api/sales/**","/authenticate", "/register").permitAll().anyRequest()
+                .csrf().disable()//"/**","/api/sales/**",
+                .authorizeRequests().antMatchers("/authenticate", "/register", "/hello","/api/v1/**",
+                        "/v2/api-docs",
+                        "/configuration/ui",
+                        "/swagger-resources/**",
+                        "/configuration/security",
+                        "/swagger-ui.html",
+                        "/webjars/**","/v3/api-docs/**",
+                        "/swagger-ui/**",
+                        "/swagger-ui.html"
+                ).permitAll().anyRequest()
                 // dont authenticate this particular request
 //                .authorizeRequests().antMatchers("/**","/authenticate", "/register")
                 // all other requests need to be authenticated

@@ -8,14 +8,14 @@ import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.Set;
 
 @Data
-@Table(name = "Privilege")
+@Table(name = "PRIVILEGE")
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
 public class Privilege {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,9 +36,13 @@ public class Privilege {
     @Column(name = "ACCESS_TYPE")
     private Integer accessType;
 
-    @OneToMany(mappedBy = "privilege")
-    @JsonIgnore
-     private Set<RolePrivileges> rolePrivileges;
+//    @OneToMany(mappedBy = "privilege")
+//    @JsonIgnore
+//     private Set<RolePrivileges> rolePrivileges;
+
+
+    @ManyToMany(mappedBy = "privileges", fetch = FetchType.LAZY)
+    private Set<Role> roles = new HashSet<>();
 
 
 }

@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@Transactional
 public class UsersServiceImpl implements UsersService {
     private final UsersRepository repository;
 
@@ -20,39 +21,44 @@ public class UsersServiceImpl implements UsersService {
         this.repository = repository;
     }
 
-    @Override
+
+    public Users findByUserName(String loginId) {
+        return repository.findByUserName(loginId);
+    }
+
+
     public Users save(Users entity) {
         return repository.save(entity);
     }
 
-    @Override
+
     public List<Users> save(List<Users> entities) {
         return (List<Users>) repository.saveAll(entities);
     }
 
-    @Override
+
     public void deleteById(Long id) {
         repository.deleteById(id);
     }
 
-    @Override
+
     public Optional<Users> findById(Long id) {
         return repository.findById(id);
     }
 
-    @Override
+
     public List<Users> findAll() {
         return (List<Users>) repository.findAll();
     }
 
-    @Override
+
     public Page<Users> findAll(Pageable pageable) {
         Page<Users> entityPage = repository.findAll(pageable);
         List<Users> entities = entityPage.getContent();
         return new PageImpl<>(entities, pageable, entityPage.getTotalElements());
     }
 
-    @Override
+
     public Users update(Users entity, Long id) {
         Optional<Users> optional = findById(id) ;
         if (optional.isPresent()) {

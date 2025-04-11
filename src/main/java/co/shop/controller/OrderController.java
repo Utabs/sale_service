@@ -29,4 +29,10 @@ public interface OrderController {
 
     @ApiOperation("Update one data")
     OrderDTO update(@RequestBody OrderDTO dto, @PathVariable("id") Long id);
+
+    @ApiOperation("Update one data")
+    OrderDTO findByCustomer(@PathVariable("customerId") Long customerId, @PathVariable("status") int status);
+
+    @ApiOperation("Get Customer All Order")
+    List<OrderDTO> getAllOrders(@PathVariable("username") String username);
 }

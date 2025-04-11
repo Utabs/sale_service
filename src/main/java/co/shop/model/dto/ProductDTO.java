@@ -1,9 +1,6 @@
 package co.shop.model.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.math.BigDecimal;
 import java.time.Instant;
@@ -11,8 +8,7 @@ import java.util.Objects;
 
 
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
+@RequiredArgsConstructor
 @EqualsAndHashCode
 public  class ProductDTO extends  AbstractDTO<Long> {
     private Long id;
